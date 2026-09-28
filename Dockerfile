@@ -1,10 +1,10 @@
-# Step 1: Build the Maven application natively using Java 25
-FROM maven:3-eclipse-temurin-25-alpine AS build
+# Step 1: Build the Maven application natively using stable Java 21
+FROM maven:3.9.6-eclipse-temurin-21-alpine AS build
 COPY . .
 RUN mvn clean package -DskipTests
 
-# Step 2: Lightweight runtime environment using official Eclipse Temurin JRE 25
-FROM eclipse-temurin:25-jre-jammy
+# Step 2: Lightweight runtime environment using official Eclipse Temurin JRE 21
+FROM eclipse-temurin:21-jre-jammy
 COPY --from=build /target/MaintainIt-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 
