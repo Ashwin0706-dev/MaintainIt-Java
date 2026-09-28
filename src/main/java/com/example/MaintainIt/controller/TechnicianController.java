@@ -6,13 +6,14 @@ import com.example.MaintainIt.service.TechnicianService;
 
 import jakarta.validation.Valid;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/technicians")
+@CrossOrigin
 public class TechnicianController {
 
     private final TechnicianService technicianService;
@@ -20,26 +21,37 @@ public class TechnicianController {
     public TechnicianController(
             TechnicianService technicianService) {
 
-        this.technicianService =
-                technicianService;
+        this.technicianService = technicianService;
     }
 
-
+    // CREATE TECHNICIAN
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Technician createTechnician(
+    public ResponseEntity<Technician> createTechnician(
             @Valid @RequestBody TechnicianRequest request) {
 
-        return technicianService.createTechnician(
-                request
+        return ResponseEntity.ok(
+                technicianService.createTechnician(request)
         );
     }
 
-
+    // GET ALL TECHNICIANS
     @GetMapping
-    public List<Technician> getAllTechnicians() {
+    public ResponseEntity<List<Technician>> getAllTechnicians() {
 
-        return technicianService
-                .getAllTechnicians();
+        return ResponseEntity.ok(
+                technicianService.getAllTechnicians()
+        );
+    }
+
+    // DELETE TECHNICIAN
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteTechnician(
+            @PathVariable Long id) {
+
+        technicianService.deleteTechnician(id);
+
+        return ResponseEntity.ok(
+                "Technician deleted successfully"
+        );
     }
 }

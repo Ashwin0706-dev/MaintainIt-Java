@@ -1,75 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>MaintainIt - Preventive Maintenance Scheduler</title>
 
     <style>
-
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f7fb;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f9;
             color: #222;
         }
 
+        /* =========================
+           HEADER
+        ========================= */
+
         header {
-            background: #17365d;
+            background: #1f2937;
             color: white;
-            padding: 28px;
-            text-align: center;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         header h1 {
-            margin: 0;
-            font-size: 30px;
+            font-size: 25px;
         }
 
         header p {
-            margin-top: 8px;
+            font-size: 14px;
+            margin-top: 5px;
+            color: #d1d5db;
         }
+
+        /* =========================
+           NAVIGATION
+        ========================= */
 
         nav {
             background: white;
-            padding: 12px;
-            text-align: center;
+            padding: 12px 25px;
             border-bottom: 1px solid #ddd;
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         nav button {
             border: none;
+            background: #e5e7eb;
             padding: 10px 16px;
-            margin: 4px;
-            border-radius: 5px;
-            background: #17365d;
-            color: white;
+            border-radius: 6px;
             cursor: pointer;
+            font-size: 14px;
         }
 
         nav button:hover {
-            background: #285b91;
+            background: #d1d5db;
         }
 
-        .container {
-            width: 92%;
-            max-width: 1250px;
-            margin: 25px auto;
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+            padding: 25px;
+            max-width: 1400px;
+            margin: auto;
         }
 
-        .cards {
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 22px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .section h2 {
+            margin-bottom: 18px;
+            color: #1f2937;
+        }
+
+        /* =========================
+           DASHBOARD
+        ========================= */
+
+        .dashboard {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 18px;
@@ -80,107 +106,124 @@
             background: white;
             padding: 22px;
             border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
 
         .card h3 {
-            margin: 0;
-            color: #555;
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 10px;
         }
 
-        .card p {
+        .card .number {
             font-size: 30px;
             font-weight: bold;
-            color: #17365d;
-            margin: 10px 0 0;
+            color: #111827;
         }
 
-        .section {
-            background: white;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        .section h2 {
-            margin-top: 0;
-            color: #17365d;
-        }
+        /* =========================
+           FORMS
+        ========================= */
 
         .form-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
         }
 
-        .full {
-            grid-column: 1 / 3;
+        .form-group {
+            display: flex;
+            flex-direction: column;
         }
 
-        label {
-            display: block;
-            font-weight: bold;
+        .form-group label {
             margin-bottom: 6px;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 11px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            font-weight: bold;
             font-size: 14px;
         }
 
-        input:focus,
-        select:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #17365d;
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 100%;
         }
 
-        textarea {
+        .form-group textarea {
+            min-height: 90px;
             resize: vertical;
-            min-height: 100px;
         }
 
-        .primary-btn {
-            margin-top: 18px;
-            padding: 11px 22px;
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-help {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .btn {
             border: none;
-            border-radius: 5px;
-            background: #17365d;
-            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
             cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
         }
 
-        .primary-btn:hover {
-            background: #285b91;
+        .btn-primary {
+            background: #2563eb;
+            color: white;
         }
 
-        .message {
-            display: none;
-            margin-top: 15px;
-            padding: 14px;
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-success {
+            background: #16a34a;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #15803d;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 14px;
             border-radius: 5px;
-            background: #eef5ff;
-            border-left: 5px solid #17365d;
+            cursor: pointer;
+            font-size: 13px;
         }
 
-        .error {
-            background: #fff0f0;
-            border-left-color: #c0392b;
-            color: #9b2c2c;
+        .btn-danger:hover {
+            background: #b02a37;
         }
 
-        .success {
-            background: #eefaf1;
-            border-left-color: #16803c;
-            color: #16803c;
+        .btn-warning {
+            background: #f59e0b;
+            color: white;
         }
+
+        .btn-warning:hover {
+            background: #d97706;
+        }
+
+        /* =========================
+           TABLES
+        ========================= */
 
         .table-container {
             overflow-x: auto;
@@ -189,217 +232,190 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
-            min-width: 900px;
+            margin-top: 10px;
         }
 
         th,
         td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: left;
+            font-size: 14px;
         }
 
         th {
-            background: #17365d;
-            color: white;
+            background: #f3f4f6;
+            font-weight: bold;
+            color: #374151;
         }
 
-        tr:nth-child(even) {
-            background: #f7f7f7;
+        tr:hover {
+            background: #f9fafb;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
         }
 
         .status-open {
-            color: #c47700;
-            font-weight: bold;
+            background: #fef3c7;
+            color: #92400e;
         }
 
         .status-completed {
-            color: #16803c;
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-overdue {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        #message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            max-width: 350px;
+            padding: 14px 18px;
+            border-radius: 7px;
+            display: none;
+            z-index: 9999;
             font-weight: bold;
         }
 
+        .message-success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        .message-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        /* =========================
+           EMPTY STATE
+        ========================= */
+
         .empty {
             text-align: center;
-            padding: 20px;
-            color: #777;
+            padding: 25px;
+            color: #6b7280;
         }
 
-        .hint {
-            font-size: 13px;
-            color: #666;
-            margin-top: 5px;
-        }
+        /* =========================
+           RESPONSIVE
+        ========================= */
 
-        footer {
-            background: #17365d;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 30px;
-        }
-
-        @media(max-width: 800px) {
-
-            .cards {
-                grid-template-columns: 1fr 1fr;
+        @media (max-width: 900px) {
+            .dashboard {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .form-grid {
                 grid-template-columns: 1fr;
             }
-
-            .full {
-                grid-column: 1;
-            }
         }
 
-        @media(max-width: 550px) {
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
 
-            .cards {
+            main {
+                padding: 15px;
+            }
+
+            .dashboard {
                 grid-template-columns: 1fr;
             }
 
-            nav button {
-                width: 90%;
-            }
-
-            header h1 {
-                font-size: 22px;
+            nav {
+                padding: 10px;
             }
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-
-<!-- ========================================================= -->
-<!-- HEADER -->
-<!-- ========================================================= -->
-
 <header>
-
-    <h1>MaintainIt</h1>
-
-    <p>
-        Preventive Maintenance Scheduler for Equipment
-    </p>
-
+    <div>
+        <h1>MaintainIt</h1>
+        <p>Preventive Maintenance Scheduler for Equipment</p>
+    </div>
 </header>
 
-
-<!-- ========================================================= -->
-<!-- NAVIGATION -->
-<!-- ========================================================= -->
-
 <nav>
-
-    <button onclick="showSection('machines')">
-        Machines
-    </button>
-
-    <button onclick="showSection('technicians')">
-        Technicians
-    </button>
-
-    <button onclick="showSection('usage')">
-        Log Usage
-    </button>
-
-    <button onclick="showSection('tasks')">
-        Maintenance Tasks
-    </button>
-
-    <button onclick="showSection('overdue')">
-        Overdue
-    </button>
-
+    <button onclick="scrollToSection('dashboard')">Dashboard</button>
+    <button onclick="scrollToSection('machines')">Machines</button>
+    <button onclick="scrollToSection('technicians')">Technicians</button>
+    <button onclick="scrollToSection('usage')">Usage</button>
+    <button onclick="scrollToSection('tasks')">Tasks</button>
+    <button onclick="scrollToSection('overdue')">Overdue</button>
 </nav>
 
+<main>
 
-<div class="container">
+    <!-- =========================
+         DASHBOARD
+    ========================= -->
 
-
-    <!-- ===================================================== -->
-    <!-- DASHBOARD -->
-    <!-- ===================================================== -->
-
-    <div class="cards">
+    <section class="dashboard" id="dashboard">
 
         <div class="card">
-
             <h3>Total Machines</h3>
-
-            <p id="machineCount">
-                0
-            </p>
-
+            <div class="number" id="totalMachines">0</div>
         </div>
 
-
         <div class="card">
-
             <h3>Open Tasks</h3>
-
-            <p id="openTaskCount">
-                0
-            </p>
-
+            <div class="number" id="openTasks">0</div>
         </div>
 
-
         <div class="card">
-
-            <h3>Overdue</h3>
-
-            <p id="overdueCount">
-                0
-            </p>
-
+            <h3>Overdue Tasks</h3>
+            <div class="number" id="overdueTasks">0</div>
         </div>
 
-
         <div class="card">
-
             <h3>Technicians</h3>
-
-            <p id="technicianCount">
-                0
-            </p>
-
+            <div class="number" id="totalTechnicians">0</div>
         </div>
 
-    </div>
+    </section>
 
 
-    <!-- ===================================================== -->
-    <!-- REGISTER MACHINE -->
-    <!-- ===================================================== -->
+    <!-- =========================
+         REGISTER MACHINE
+    ========================= -->
 
-    <div class="section" id="machines">
+    <section class="section" id="machine-form">
 
-        <h2>
-            Register Machine
-        </h2>
-
-        <p>
-            Register a machine with its preventive maintenance interval.
-        </p>
-
+        <h2>Register Machine</h2>
 
         <form id="machineForm">
 
             <div class="form-grid">
 
-
-                <!-- MACHINE NAME -->
-
-                <div>
-
+                <div class="form-group">
                     <label for="machineName">
                         Machine Name
                     </label>
@@ -407,21 +423,20 @@
                     <input
                         type="text"
                         id="machineName"
-                        placeholder="Example: CNC Machine"
+                        maxlength="100"
                         required
+                        pattern="[A-Za-z ]+"
+                        title="Machine name must contain letters and spaces only"
+                        placeholder="Example: CNC Machine"
                     >
 
-                    <div class="hint">
+                    <span class="form-help">
                         Letters and spaces only.
-                    </div>
-
+                    </span>
                 </div>
 
 
-                <!-- MACHINE CODE -->
-
-                <div>
-
+                <div class="form-group">
                     <label for="machineCode">
                         Machine Code
                     </label>
@@ -429,45 +444,37 @@
                     <input
                         type="text"
                         id="machineCode"
-                        placeholder="Example: CNC001"
-                        pattern="[A-Za-z]+[0-9]+"
+                        maxlength="20"
                         required
+                        pattern="[A-Za-z]+[0-9]+"
+                        title="Machine code must contain letters followed by numbers"
+                        placeholder="Example: CNC001"
                     >
 
-                    <div class="hint">
-                        Letters followed by numbers. Example: CNC001
-                    </div>
-
+                    <span class="form-help">
+                        Must contain letters followed by numbers.
+                    </span>
                 </div>
 
 
-                <!-- INTERVAL TYPE -->
-
-                <div>
-
+                <div class="form-group">
                     <label for="intervalType">
-                        Maintenance Type
+                        Maintenance Interval Type
                     </label>
 
-                    <select id="intervalType">
-
+                    <select id="intervalType" required>
+                        <option value="">Select Type</option>
                         <option value="USAGE_HOURS">
                             Usage Hours
                         </option>
-
                         <option value="CALENDAR_DAYS">
                             Calendar Days
                         </option>
-
                     </select>
-
                 </div>
 
 
-                <!-- INTERVAL -->
-
-                <div>
-
+                <div class="form-group">
                     <label for="maintenanceInterval">
                         Maintenance Interval
                     </label>
@@ -477,97 +484,79 @@
                         id="maintenanceInterval"
                         min="1"
                         step="1"
-                        placeholder="Example: 100"
                         required
+                        placeholder="Example: 100"
                     >
 
-                    <div class="hint">
-                        Must be greater than 0.
-                    </div>
+                    <span class="form-help">
+                        Must be a positive whole number.
+                    </span>
+                </div>
 
+
+                <div class="full-width">
+                    <button
+                        type="submit"
+                        class="btn btn-primary">
+                        Register Machine
+                    </button>
                 </div>
 
             </div>
 
-
-            <button
-                type="submit"
-                class="primary-btn">
-
-                Register Machine
-
-            </button>
-
         </form>
 
-
-        <div
-            id="machineMessage"
-            class="message">
-        </div>
-
-    </div>
+    </section>
 
 
-    <!-- ===================================================== -->
-    <!-- REGISTERED MACHINES -->
-    <!-- ===================================================== -->
+    <!-- =========================
+         MACHINES
+    ========================= -->
 
-    <div class="section">
+    <section class="section" id="machines">
 
-        <h2>
-            Registered Machines
-        </h2>
+        <h2>Registered Machines</h2>
 
         <div class="table-container">
 
             <table>
 
                 <thead>
-
                     <tr>
-
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Code</th>
+                        <th>Machine Name</th>
+                        <th>Machine Code</th>
                         <th>Interval Type</th>
                         <th>Interval</th>
-                        <th>Current Hours</th>
+                        <th>Current Usage</th>
                         <th>Last Maintenance</th>
-
+                        <th>Action</th>
                     </tr>
-
                 </thead>
 
-                <tbody id="machineTable">
-
+                <tbody id="machinesTableBody">
                 </tbody>
 
             </table>
 
         </div>
 
-    </div>
+    </section>
 
 
-    <!-- ===================================================== -->
-    <!-- TECHNICIAN -->
-    <!-- ===================================================== -->
+    <!-- =========================
+         REGISTER TECHNICIAN
+    ========================= -->
 
-    <div class="section" id="technicians">
+    <section class="section" id="technician-form">
 
-        <h2>
-            Register Technician
-        </h2>
+        <h2>Register Technician</h2>
 
         <form id="technicianForm">
 
             <div class="form-grid">
 
-
-                <!-- NAME -->
-
-                <div>
+                <div class="form-group">
 
                     <label for="technicianName">
                         Technician Name
@@ -576,73 +565,79 @@
                     <input
                         type="text"
                         id="technicianName"
+                        maxlength="100"
                         required
+                        placeholder="Enter technician name"
                     >
 
                 </div>
 
 
-                <!-- EMAIL -->
-
-                <div>
-
-                    <label for="technicianEmail">
-                        Email
-                    </label>
-
-                    <input
-                        type="email"
-                        id="technicianEmail"
-                        required
-                    >
-
-                </div>
-
-
-                <!-- PHONE -->
-
-                <div>
+                <div class="form-group">
 
                     <label for="technicianPhone">
                         Mobile Number
                     </label>
 
                     <input
-                        type="tel"
+                        type="text"
                         id="technicianPhone"
                         maxlength="10"
                         minlength="10"
                         inputmode="numeric"
+                        required
                         pattern="[0-9]{10}"
                         placeholder="Enter 10 digit mobile number"
-                        required
                     >
 
-                    <div class="hint">
-                        Exactly 10 digits. Numbers only.
-                    </div>
+                    <span class="form-help">
+                        Exactly 10 digits. No letters, spaces or special characters.
+                    </span>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="specialization">
+                        Specialization
+                    </label>
+
+                    <input
+                        type="text"
+                        id="specialization"
+                        maxlength="100"
+                        required
+                        placeholder="Example: Mechanical"
+                    >
+
+                </div>
+
+
+                <div class="full-width">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary">
+                        Register Technician
+                    </button>
 
                 </div>
 
             </div>
 
-
-            <button
-                type="submit"
-                class="primary-btn">
-
-                Register Technician
-
-            </button>
-
         </form>
 
+    </section>
 
-        <div
-            id="technicianMessage"
-            class="message">
-        </div>
 
+    <!-- =========================
+         TECHNICIANS
+    ========================= -->
+
+    <section class="section" id="technicians">
+
+        <h2>Registered Technicians</h2>
 
         <div class="table-container">
 
@@ -651,48 +646,38 @@
                 <thead>
 
                     <tr>
-
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Email</th>
                         <th>Phone</th>
-
+                        <th>Specialization</th>
+                        <th>Action</th>
                     </tr>
 
                 </thead>
 
-                <tbody id="technicianTable">
-
+                <tbody id="techniciansTableBody">
                 </tbody>
 
             </table>
 
         </div>
 
-    </div>
+    </section>
 
 
-    <!-- ===================================================== -->
-    <!-- LOG USAGE -->
-    <!-- ===================================================== -->
+    <!-- =========================
+         LOG USAGE
+    ========================= -->
 
-    <div class="section" id="usage">
+    <section class="section" id="usage">
 
-        <h2>
-            Log Machine Usage
-        </h2>
-
-        <p>
-            Enter the additional hours used by a machine.
-        </p>
-
+        <h2>Log Machine Usage</h2>
 
         <form id="usageForm">
 
             <div class="form-grid">
 
-
-                <div>
+                <div class="form-group">
 
                     <label for="usageMachineId">
                         Machine ID
@@ -704,12 +689,13 @@
                         min="1"
                         step="1"
                         required
+                        placeholder="Enter machine ID"
                     >
 
                 </div>
 
 
-                <div>
+                <div class="form-group">
 
                     <label for="hoursUsed">
                         Hours Used
@@ -718,44 +704,39 @@
                     <input
                         type="number"
                         id="hoursUsed"
-                        min="0.1"
-                        step="0.1"
+                        min="0.01"
+                        step="0.01"
                         required
+                        placeholder="Example: 10"
                     >
+
+                </div>
+
+
+                <div class="full-width">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary">
+                        Log Usage
+                    </button>
 
                 </div>
 
             </div>
 
-
-            <button
-                type="submit"
-                class="primary-btn">
-
-                Log Usage
-
-            </button>
-
         </form>
 
-
-        <div
-            id="usageMessage"
-            class="message">
-        </div>
-
-    </div>
+    </section>
 
 
-    <!-- ===================================================== -->
-    <!-- MAINTENANCE TASKS -->
-    <!-- ===================================================== -->
+    <!-- =========================
+         MAINTENANCE TASKS
+    ========================= -->
 
-    <div class="section" id="tasks">
+    <section class="section" id="tasks">
 
-        <h2>
-            Maintenance Tasks
-        </h2>
+        <h2>Maintenance Tasks</h2>
 
         <div class="table-container">
 
@@ -764,55 +745,44 @@
                 <thead>
 
                     <tr>
-
                         <th>ID</th>
                         <th>Machine</th>
-                        <th>Code</th>
                         <th>Status</th>
+                        <th>Trigger</th>
                         <th>Due Usage</th>
                         <th>Due Date</th>
-                        <th>Reason</th>
-
+                        <th>Technician</th>
+                        <th>Created</th>
                     </tr>
 
                 </thead>
 
-                <tbody id="taskTable">
-
+                <tbody id="tasksTableBody">
                 </tbody>
 
             </table>
 
         </div>
 
-    </div>
+    </section>
 
 
-    <!-- ===================================================== -->
-    <!-- COMPLETE TASK -->
-    <!-- ===================================================== -->
+    <!-- =========================
+         COMPLETE TASK
+    ========================= -->
 
-    <div class="section">
+    <section class="section" id="complete-task">
 
-        <h2>
-            Complete Maintenance Task
-        </h2>
-
-        <p>
-            A technician must complete the open maintenance task
-            and provide notes.
-        </p>
-
+        <h2>Complete Maintenance Task</h2>
 
         <form id="completeTaskForm">
 
             <div class="form-grid">
 
-
-                <div>
+                <div class="form-group">
 
                     <label for="completeTaskId">
-                        Maintenance Task ID
+                        Task ID
                     </label>
 
                     <input
@@ -821,12 +791,13 @@
                         min="1"
                         step="1"
                         required
+                        placeholder="Enter task ID"
                     >
 
                 </div>
 
 
-                <div>
+                <div class="form-group">
 
                     <label for="completeTechnicianId">
                         Technician ID
@@ -838,56 +809,50 @@
                         min="1"
                         step="1"
                         required
+                        placeholder="Enter technician ID"
                     >
 
                 </div>
 
 
-                <div class="full">
+                <div class="form-group full-width">
 
                     <label for="completionNotes">
-                        Completion Notes
+                        Notes
                     </label>
 
                     <textarea
                         id="completionNotes"
-                        placeholder="Describe the maintenance performed..."
-                        required>
+                        placeholder="Enter maintenance notes">
                     </textarea>
+
+                </div>
+
+
+                <div class="full-width">
+
+                    <button
+                        type="submit"
+                        class="btn btn-success">
+                        Complete Task
+                    </button>
 
                 </div>
 
             </div>
 
-
-            <button
-                type="submit"
-                class="primary-btn">
-
-                Complete Maintenance
-
-            </button>
-
         </form>
 
-
-        <div
-            id="completeMessage"
-            class="message">
-        </div>
-
-    </div>
+    </section>
 
 
-    <!-- ===================================================== -->
-    <!-- OVERDUE -->
-    <!-- ===================================================== -->
+    <!-- =========================
+         OVERDUE TASKS
+    ========================= -->
 
-    <div class="section" id="overdue">
+    <section class="section" id="overdue">
 
-        <h2>
-            Overdue Maintenance
-        </h2>
+        <h2>Overdue Maintenance</h2>
 
         <div class="table-container">
 
@@ -896,155 +861,156 @@
                 <thead>
 
                     <tr>
-
                         <th>Task ID</th>
                         <th>Machine</th>
                         <th>Machine Code</th>
                         <th>Current Usage</th>
                         <th>Due Usage</th>
                         <th>Due Date</th>
-
+                        <th>Status</th>
                     </tr>
 
                 </thead>
 
-                <tbody id="overdueTable">
-
+                <tbody id="overdueTableBody">
                 </tbody>
 
             </table>
 
         </div>
 
-    </div>
+    </section>
 
-</div>
+</main>
 
 
-<!-- ========================================================= -->
-<!-- FOOTER -->
-<!-- ========================================================= -->
+<!-- MESSAGE -->
 
-<footer>
-
-    MaintainIt - Preventive Maintenance Scheduler
-
-</footer>
+<div id="message"></div>
 
 
 <script>
 
+    /* =====================================================
+       GENERAL FUNCTIONS
+    ===================================================== */
 
-/* ========================================================= */
-/* COMMON API FUNCTION */
-/* ========================================================= */
+    function showMessage(message, type = "success") {
 
-async function api(url, options = {}) {
+        const element = document.getElementById("message");
 
-    const response =
-        await fetch(url, options);
+        element.textContent = message;
 
-    const text =
-        await response.text();
+        element.className =
+            type === "error"
+                ? "message-error"
+                : "message-success";
 
-    let data;
+        element.style.display = "block";
 
-    try {
-
-        data = text
-            ? JSON.parse(text)
-            : null;
-
-    } catch {
-
-        data = text;
-
+        setTimeout(() => {
+            element.style.display = "none";
+        }, 4000);
     }
 
 
-    if (!response.ok) {
+    function scrollToSection(id) {
 
-        let message =
-            "Request failed.";
+        const element = document.getElementById(id);
 
-        if (data && data.message) {
-
-            message =
-                data.message;
-
-        } else if (
-            typeof data === "string"
-            && data.length > 0
-        ) {
-
-            message = data;
-
+        if (element) {
+            element.scrollIntoView({
+                behavior: "smooth"
+            });
         }
-
-        throw new Error(message);
     }
 
 
-    return data;
-}
+    async function apiRequest(url, options = {}) {
 
-
-/* ========================================================= */
-/* SHOW SECTION */
-/* ========================================================= */
-
-function showSection(id) {
-
-    const element =
-        document.getElementById(id);
-
-    if (element) {
-
-        element.scrollIntoView({
-            behavior: "smooth"
+        const response = await fetch(url, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            ...options
         });
 
+        const text = await response.text();
+
+        let data;
+
+        try {
+            data = text ? JSON.parse(text) : null;
+        } catch {
+            data = text;
+        }
+
+        if (!response.ok) {
+
+            let message = "Request failed";
+
+            if (data && data.message) {
+                message = data.message;
+            } else if (typeof data === "string" && data) {
+                message = data;
+            }
+
+            throw new Error(message);
+        }
+
+        return data;
     }
-}
 
 
-/* ========================================================= */
-/* SHOW MESSAGE */
-/* ========================================================= */
+    /* =====================================================
+       MACHINE VALIDATION
+    ===================================================== */
 
-function showMessage(
-    elementId,
-    message,
-    error = false
-) {
+    document
+        .getElementById("machineName")
+        .addEventListener("input", function () {
 
-    const box =
-        document.getElementById(elementId);
-
-    box.style.display = "block";
-
-    box.className =
-        error
-            ? "message error"
-            : "message success";
-
-    box.textContent =
-        message;
-}
+            this.value = this.value.replace(
+                /[^A-Za-z ]/g,
+                ""
+            );
+        });
 
 
-/* ========================================================= */
-/* MACHINE REGISTRATION */
-/* ========================================================= */
+    document
+        .getElementById("machineCode")
+        .addEventListener("input", function () {
 
-document
-    .getElementById("machineForm")
-    .addEventListener(
-        "submit",
-        async function(event) {
+            this.value = this.value.replace(
+                /[^A-Za-z0-9]/g,
+                ""
+            );
+        });
+
+
+    /* =====================================================
+       TECHNICIAN PHONE VALIDATION
+    ===================================================== */
+
+    document
+        .getElementById("technicianPhone")
+        .addEventListener("input", function () {
+
+            this.value = this.value
+                .replace(/\D/g, "")
+                .slice(0, 10);
+        });
+
+
+    /* =====================================================
+       REGISTER MACHINE
+    ===================================================== */
+
+    document
+        .getElementById("machineForm")
+        .addEventListener("submit", async function (event) {
 
             event.preventDefault();
-
 
             const machineName =
                 document
@@ -1052,253 +1018,372 @@ document
                     .value
                     .trim();
 
-
             const machineCode =
                 document
                     .getElementById("machineCode")
                     .value
                     .trim();
 
+            const intervalType =
+                document
+                    .getElementById("intervalType")
+                    .value;
 
-            const interval =
+            const maintenanceInterval =
                 Number(
                     document
-                        .getElementById(
-                            "maintenanceInterval"
-                        )
+                        .getElementById("maintenanceInterval")
                         .value
                 );
 
 
-            /* MACHINE NAME */
-
-            if (!machineName) {
-
-                showMessage(
-                    "machineMessage",
-                    "Machine name is required.",
-                    true
-                );
-
-                return;
-            }
-
-
-            /*
-             * Machine name:
-             * letters and spaces only.
-             */
+            /* MACHINE NAME VALIDATION */
 
             if (!/^[A-Za-z ]+$/.test(machineName)) {
 
                 showMessage(
-                    "machineMessage",
                     "Machine name must contain letters and spaces only.",
-                    true
+                    "error"
                 );
 
                 return;
             }
 
 
-            /* MACHINE CODE */
-
-            if (!machineCode) {
-
-                showMessage(
-                    "machineMessage",
-                    "Machine code is required.",
-                    true
-                );
-
-                return;
-            }
-
-
-            /*
-             * Machine code:
-             * one or more letters followed
-             * by one or more numbers.
-             *
-             * Examples:
-             * CNC001
-             * LAT100
-             * M123
-             */
+            /* MACHINE CODE VALIDATION */
 
             if (!/^[A-Za-z]+[0-9]+$/.test(machineCode)) {
 
                 showMessage(
-                    "machineMessage",
-                    "Machine code must contain letters followed by numbers. Example: CNC001.",
-                    true
+                    "Machine code must contain letters followed by numbers. Example: CNC001",
+                    "error"
                 );
 
                 return;
             }
 
 
-            /* MAINTENANCE INTERVAL */
+            /* INTERVAL VALIDATION */
 
             if (
-                !Number.isFinite(interval)
-                || interval <= 0
-                || !Number.isInteger(interval)
+                !Number.isInteger(maintenanceInterval) ||
+                maintenanceInterval <= 0
             ) {
 
                 showMessage(
-                    "machineMessage",
                     "Maintenance interval must be a positive whole number.",
-                    true
+                    "error"
                 );
 
                 return;
             }
 
 
-            const data = {
+            if (!intervalType) {
 
-                machineName:
-                    machineName,
+                showMessage(
+                    "Please select a maintenance interval type.",
+                    "error"
+                );
 
-                machineCode:
-                    machineCode,
-
-                intervalType:
-                    document
-                        .getElementById(
-                            "intervalType"
-                        )
-                        .value,
-
-                maintenanceInterval:
-                    interval
-
-            };
+                return;
+            }
 
 
             try {
 
-                await api(
+                await apiRequest(
                     "/api/machines",
                     {
                         method: "POST",
 
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
+                        body: JSON.stringify({
 
-                        body:
-                            JSON.stringify(data)
+                            machineName: machineName,
+
+                            machineCode: machineCode,
+
+                            intervalType: intervalType,
+
+                            maintenanceInterval:
+                                maintenanceInterval
+
+                        })
                     }
                 );
 
 
                 showMessage(
-                    "machineMessage",
                     "Machine registered successfully."
                 );
 
 
                 document
-                    .getElementById(
-                        "machineForm"
-                    )
+                    .getElementById("machineForm")
                     .reset();
 
 
-                loadAll();
+                loadMachines();
+
+                loadDashboard();
+
 
             } catch (error) {
 
                 showMessage(
-                    "machineMessage",
                     error.message,
-                    true
+                    "error"
                 );
-
             }
 
+        });
+
+
+    /* =====================================================
+       LOAD MACHINES
+    ===================================================== */
+
+    async function loadMachines() {
+
+        try {
+
+            const machines =
+                await apiRequest(
+                    "/api/machines"
+                );
+
+
+            const tbody =
+                document.getElementById(
+                    "machinesTableBody"
+                );
+
+
+            tbody.innerHTML = "";
+
+
+            if (
+                !machines ||
+                machines.length === 0
+            ) {
+
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8"
+                            class="empty">
+                            No machines registered.
+                        </td>
+                    </tr>
+                `;
+
+                return;
+            }
+
+
+            machines.forEach(machine => {
+
+                const row =
+                    document.createElement("tr");
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${machine.id ?? "-"}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            machine.machineName ?? "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            machine.machineCode ?? "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${formatValue(
+                            machine.intervalType
+                        )}
+                    </td>
+
+                    <td>
+                        ${formatValue(
+                            machine.maintenanceInterval
+                        )}
+                    </td>
+
+                    <td>
+                        ${formatValue(
+                            machine.currentUsageHours
+                        )}
+                    </td>
+
+                    <td>
+                        ${formatDate(
+                            machine.lastMaintenanceDate
+                        )}
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="btn-danger"
+                            onclick="deleteMachine(${machine.id})">
+
+                            Delete
+
+                        </button>
+
+                    </td>
+
+                `;
+
+
+                tbody.appendChild(row);
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Error loading machines:",
+                error
+            );
+
+            showMessage(
+                "Unable to load machines: " +
+                error.message,
+                "error"
+            );
         }
-    );
+    }
 
 
-/* ========================================================= */
-/* TECHNICIAN REGISTRATION */
-/* ========================================================= */
+    /* =====================================================
+       DELETE MACHINE
+    ===================================================== */
 
-document
-    .getElementById("technicianForm")
-    .addEventListener(
-        "submit",
-        async function(event) {
+    async function deleteMachine(id) {
+
+        const confirmed =
+            confirm(
+                "Are you sure you want to delete this machine?\n\n" +
+                "All usage logs and maintenance tasks belonging " +
+                "to this machine will also be deleted."
+            );
+
+
+        if (!confirmed) {
+            return;
+        }
+
+
+        try {
+
+            await apiRequest(
+                `/api/machines/${id}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+
+            showMessage(
+                "Machine deleted successfully."
+            );
+
+
+            loadMachines();
+
+            loadMaintenanceTasks();
+
+            loadOverdueTasks();
+
+            loadDashboard();
+
+
+        } catch (error) {
+
+            console.error(
+                "Error deleting machine:",
+                error
+            );
+
+            showMessage(
+                "Failed to delete machine: " +
+                error.message,
+                "error"
+            );
+        }
+    }
+
+
+    /* =====================================================
+       REGISTER TECHNICIAN
+    ===================================================== */
+
+    document
+        .getElementById("technicianForm")
+        .addEventListener("submit", async function (event) {
 
             event.preventDefault();
 
 
             const name =
                 document
-                    .getElementById(
-                        "technicianName"
-                    )
-                    .value
-                    .trim();
-
-
-            const email =
-                document
-                    .getElementById(
-                        "technicianEmail"
-                    )
+                    .getElementById("technicianName")
                     .value
                     .trim();
 
 
             const phone =
                 document
-                    .getElementById(
-                        "technicianPhone"
-                    )
+                    .getElementById("technicianPhone")
                     .value
                     .trim();
+
+
+            const specialization =
+                document
+                    .getElementById("specialization")
+                    .value
+                    .trim();
+
+
+            /* PHONE VALIDATION */
+
+            if (!/^[0-9]{10}$/.test(phone)) {
+
+                showMessage(
+                    "Phone number must contain exactly 10 digits.",
+                    "error"
+                );
+
+                return;
+            }
 
 
             if (!name) {
 
                 showMessage(
-                    "technicianMessage",
                     "Technician name is required.",
-                    true
+                    "error"
                 );
 
                 return;
             }
 
 
-            if (!email) {
+            if (!specialization) {
 
                 showMessage(
-                    "technicianMessage",
-                    "Email is required.",
-                    true
-                );
-
-                return;
-            }
-
-
-            /*
-             * Mobile number:
-             * exactly 10 digits.
-             */
-
-            if (!/^[0-9]{10}$/.test(phone)) {
-
-                showMessage(
-                    "technicianMessage",
-                    "Mobile number must contain exactly 10 digits.",
-                    true
+                    "Specialization is required.",
+                    "error"
                 );
 
                 return;
@@ -1307,83 +1392,222 @@ document
 
             try {
 
-                await api(
+                await apiRequest(
                     "/api/technicians",
                     {
                         method: "POST",
 
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
+                        body: JSON.stringify({
 
-                        body:
-                            JSON.stringify({
-                                name,
-                                email,
-                                phone
-                            })
+                            name: name,
+
+                            phone: phone,
+
+                            specialization:
+                                specialization
+
+                        })
                     }
                 );
 
 
                 showMessage(
-                    "technicianMessage",
                     "Technician registered successfully."
                 );
 
 
                 document
-                    .getElementById(
-                        "technicianForm"
-                    )
+                    .getElementById("technicianForm")
                     .reset();
 
 
-                loadAll();
+                loadTechnicians();
+
+                loadDashboard();
+
 
             } catch (error) {
 
                 showMessage(
-                    "technicianMessage",
                     error.message,
-                    true
+                    "error"
                 );
-
             }
 
+        });
+
+
+    /* =====================================================
+       LOAD TECHNICIANS
+    ===================================================== */
+
+    async function loadTechnicians() {
+
+        try {
+
+            const technicians =
+                await apiRequest(
+                    "/api/technicians"
+                );
+
+
+            const tbody =
+                document.getElementById(
+                    "techniciansTableBody"
+                );
+
+
+            tbody.innerHTML = "";
+
+
+            if (
+                !technicians ||
+                technicians.length === 0
+            ) {
+
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5"
+                            class="empty">
+                            No technicians registered.
+                        </td>
+                    </tr>
+                `;
+
+                return;
+            }
+
+
+            technicians.forEach(technician => {
+
+                const row =
+                    document.createElement("tr");
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${technician.id ?? "-"}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            technician.name ?? "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            technician.phone ?? "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            technician.specialization ?? "-"
+                        )}
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="btn-danger"
+                            onclick="deleteTechnician(${technician.id})">
+
+                            Delete
+
+                        </button>
+
+                    </td>
+
+                `;
+
+
+                tbody.appendChild(row);
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Error loading technicians:",
+                error
+            );
+
+            showMessage(
+                "Unable to load technicians: " +
+                error.message,
+                "error"
+            );
         }
-    );
+    }
 
 
-/* ========================================================= */
-/* MOBILE NUMBER - BLOCK NON-NUMERIC INPUT */
-/* ========================================================= */
+    /* =====================================================
+       DELETE TECHNICIAN
+    ===================================================== */
 
-document
-    .getElementById("technicianPhone")
-    .addEventListener(
-        "input",
-        function() {
+    async function deleteTechnician(id) {
 
-            this.value =
-                this.value
-                    .replace(/\D/g, "")
-                    .slice(0, 10);
+        const confirmed =
+            confirm(
+                "Are you sure you want to delete this technician?\n\n" +
+                "Existing maintenance task history will be preserved, " +
+                "but the technician assignment will be removed."
+            );
 
+
+        if (!confirmed) {
+            return;
         }
-    );
 
 
-/* ========================================================= */
-/* LOG USAGE */
-/* ========================================================= */
+        try {
 
-document
-    .getElementById("usageForm")
-    .addEventListener(
-        "submit",
-        async function(event) {
+            await apiRequest(
+                `/api/technicians/${id}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+
+            showMessage(
+                "Technician deleted successfully."
+            );
+
+
+            loadTechnicians();
+
+            loadMaintenanceTasks();
+
+            loadDashboard();
+
+
+        } catch (error) {
+
+            console.error(
+                "Error deleting technician:",
+                error
+            );
+
+            showMessage(
+                "Failed to delete technician: " +
+                error.message,
+                "error"
+            );
+        }
+    }
+
+
+    /* =====================================================
+       LOG MACHINE USAGE
+    ===================================================== */
+
+    document
+        .getElementById("usageForm")
+        .addEventListener("submit", async function (event) {
 
             event.preventDefault();
 
@@ -1391,32 +1615,27 @@ document
             const machineId =
                 Number(
                     document
-                        .getElementById(
-                            "usageMachineId"
-                        )
+                        .getElementById("usageMachineId")
                         .value
                 );
 
 
-            const hours =
+            const hoursUsed =
                 Number(
                     document
-                        .getElementById(
-                            "hoursUsed"
-                        )
+                        .getElementById("hoursUsed")
                         .value
                 );
 
 
             if (
-                !Number.isInteger(machineId)
-                || machineId <= 0
+                !Number.isInteger(machineId) ||
+                machineId <= 0
             ) {
 
                 showMessage(
-                    "usageMessage",
                     "Machine ID must be a positive whole number.",
-                    true
+                    "error"
                 );
 
                 return;
@@ -1424,14 +1643,13 @@ document
 
 
             if (
-                !Number.isFinite(hours)
-                || hours <= 0
+                !Number.isFinite(hoursUsed) ||
+                hoursUsed <= 0
             ) {
 
                 showMessage(
-                    "usageMessage",
                     "Hours used must be greater than 0.",
-                    true
+                    "error"
                 );
 
                 return;
@@ -1440,66 +1658,203 @@ document
 
             try {
 
-                await api(
+                await apiRequest(
                     "/api/usage-logs",
                     {
                         method: "POST",
 
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
+                        body: JSON.stringify({
 
-                        body:
-                            JSON.stringify({
-                                machineId:
-                                    machineId,
+                            machineId: machineId,
 
-                                hoursUsed:
-                                    hours
-                            })
+                            hoursUsed: hoursUsed
+
+                        })
                     }
                 );
 
 
                 showMessage(
-                    "usageMessage",
-                    "Usage logged successfully. Maintenance schedule checked."
+                    "Machine usage logged successfully."
                 );
 
 
                 document
-                    .getElementById(
-                        "usageForm"
-                    )
+                    .getElementById("usageForm")
                     .reset();
 
 
-                loadAll();
+                loadMachines();
+
+                loadMaintenanceTasks();
+
+                loadOverdueTasks();
+
+                loadDashboard();
+
 
             } catch (error) {
 
                 showMessage(
-                    "usageMessage",
                     error.message,
-                    true
+                    "error"
                 );
-
             }
 
+        });
+
+
+    /* =====================================================
+       LOAD MAINTENANCE TASKS
+    ===================================================== */
+
+    async function loadMaintenanceTasks() {
+
+        try {
+
+            const tasks =
+                await apiRequest(
+                    "/api/maintenance-tasks"
+                );
+
+
+            const tbody =
+                document.getElementById(
+                    "tasksTableBody"
+                );
+
+
+            tbody.innerHTML = "";
+
+
+            if (
+                !tasks ||
+                tasks.length === 0
+            ) {
+
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8"
+                            class="empty">
+                            No maintenance tasks found.
+                        </td>
+                    </tr>
+                `;
+
+                return;
+            }
+
+
+            tasks.forEach(task => {
+
+                const row =
+                    document.createElement("tr");
+
+
+                let statusClass =
+                    "status-open";
+
+
+                if (
+                    task.status === "COMPLETED"
+                ) {
+
+                    statusClass =
+                        "status-completed";
+                }
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${task.id ?? "-"}
+                    </td>
+
+                    <td>
+                        ${
+                            task.machine
+                            ? escapeHtml(
+                                task.machine.machineName ?? "-"
+                              )
+                            : "-"
+                        }
+                    </td>
+
+                    <td>
+
+                        <span class="status ${statusClass}">
+
+                            ${formatValue(task.status)}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            task.triggerReason ?? "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${formatValue(
+                            task.dueUsageHours
+                        )}
+                    </td>
+
+                    <td>
+                        ${formatDate(
+                            task.dueDate
+                        )}
+                    </td>
+
+                    <td>
+                        ${
+                            task.technician
+                            ? escapeHtml(
+                                task.technician.name ?? "-"
+                              )
+                            : "Not Assigned"
+                        }
+                    </td>
+
+                    <td>
+                        ${formatDate(
+                            task.createdAt
+                        )}
+                    </td>
+
+                `;
+
+
+                tbody.appendChild(row);
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Error loading maintenance tasks:",
+                error
+            );
+
+            showMessage(
+                "Unable to load maintenance tasks: " +
+                error.message,
+                "error"
+            );
         }
-    );
+    }
 
 
-/* ========================================================= */
-/* COMPLETE MAINTENANCE TASK */
-/* ========================================================= */
+    /* =====================================================
+       COMPLETE MAINTENANCE TASK
+    ===================================================== */
 
-document
-    .getElementById("completeTaskForm")
-    .addEventListener(
-        "submit",
-        async function(event) {
+    document
+        .getElementById("completeTaskForm")
+        .addEventListener("submit", async function (event) {
 
             event.preventDefault();
 
@@ -1507,9 +1862,7 @@ document
             const taskId =
                 Number(
                     document
-                        .getElementById(
-                            "completeTaskId"
-                        )
+                        .getElementById("completeTaskId")
                         .value
                 );
 
@@ -1517,31 +1870,26 @@ document
             const technicianId =
                 Number(
                     document
-                        .getElementById(
-                            "completeTechnicianId"
-                        )
+                        .getElementById("completeTechnicianId")
                         .value
                 );
 
 
             const notes =
                 document
-                    .getElementById(
-                        "completionNotes"
-                    )
+                    .getElementById("completionNotes")
                     .value
                     .trim();
 
 
             if (
-                !Number.isInteger(taskId)
-                || taskId <= 0
+                !Number.isInteger(taskId) ||
+                taskId <= 0
             ) {
 
                 showMessage(
-                    "completeMessage",
                     "Task ID must be a positive whole number.",
-                    true
+                    "error"
                 );
 
                 return;
@@ -1549,26 +1897,13 @@ document
 
 
             if (
-                !Number.isInteger(technicianId)
-                || technicianId <= 0
+                !Number.isInteger(technicianId) ||
+                technicianId <= 0
             ) {
 
                 showMessage(
-                    "completeMessage",
                     "Technician ID must be a positive whole number.",
-                    true
-                );
-
-                return;
-            }
-
-
-            if (!notes) {
-
-                showMessage(
-                    "completeMessage",
-                    "Completion notes are required.",
-                    true
+                    "error"
                 );
 
                 return;
@@ -1577,462 +1912,358 @@ document
 
             try {
 
-                await api(
-                    "/api/maintenance-tasks/"
-                    + taskId
-                    + "/complete",
+                await apiRequest(
+                    `/api/maintenance-tasks/${taskId}/complete`,
                     {
                         method: "PUT",
 
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
+                        body: JSON.stringify({
 
-                        body:
-                            JSON.stringify({
-                                technicianId:
-                                    technicianId,
+                            technicianId:
+                                technicianId,
 
-                                notes:
-                                    notes
-                            })
+                            notes: notes
+
+                        })
                     }
                 );
 
 
                 showMessage(
-                    "completeMessage",
-                    "Maintenance completed. Machine maintenance counter has been reset."
+                    "Maintenance task completed successfully."
                 );
 
 
                 document
-                    .getElementById(
-                        "completeTaskForm"
-                    )
+                    .getElementById("completeTaskForm")
                     .reset();
 
 
-                loadAll();
+                loadMaintenanceTasks();
+
+                loadOverdueTasks();
+
+                loadMachines();
+
+                loadDashboard();
+
 
             } catch (error) {
 
                 showMessage(
-                    "completeMessage",
                     error.message,
-                    true
+                    "error"
+                );
+            }
+
+        });
+
+
+    /* =====================================================
+       LOAD OVERDUE TASKS
+    ===================================================== */
+
+    async function loadOverdueTasks() {
+
+        try {
+
+            const tasks =
+                await apiRequest(
+                    "/api/maintenance-tasks/overdue"
                 );
 
+
+            const tbody =
+                document.getElementById(
+                    "overdueTableBody"
+                );
+
+
+            tbody.innerHTML = "";
+
+
+            if (
+                !tasks ||
+                tasks.length === 0
+            ) {
+
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7"
+                            class="empty">
+                            No overdue maintenance tasks.
+                        </td>
+                    </tr>
+                `;
+
+                return;
             }
+
+
+            tasks.forEach(task => {
+
+                const row =
+                    document.createElement("tr");
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${task.id ?? "-"}
+                    </td>
+
+                    <td>
+                        ${
+                            task.machine
+                            ? escapeHtml(
+                                task.machine.machineName ?? "-"
+                              )
+                            : "-"
+                        }
+                    </td>
+
+                    <td>
+                        ${
+                            task.machine
+                            ? escapeHtml(
+                                task.machine.machineCode ?? "-"
+                              )
+                            : "-"
+                        }
+                    </td>
+
+                    <td>
+                        ${
+                            task.machine
+                            ? formatValue(
+                                task.machine.currentUsageHours
+                              )
+                            : "-"
+                        }
+                    </td>
+
+                    <td>
+                        ${formatValue(
+                            task.dueUsageHours
+                        )}
+                    </td>
+
+                    <td>
+                        ${formatDate(
+                            task.dueDate
+                        )}
+                    </td>
+
+                    <td>
+
+                        <span class="status status-overdue">
+
+                            OVERDUE
+
+                        </span>
+
+                    </td>
+
+                `;
+
+
+                tbody.appendChild(row);
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Error loading overdue tasks:",
+                error
+            );
+
+            showMessage(
+                "Unable to load overdue tasks: " +
+                error.message,
+                "error"
+            );
+        }
+    }
+
+
+    /* =====================================================
+       DASHBOARD
+    ===================================================== */
+
+    async function loadDashboard() {
+
+        try {
+
+            const machines =
+                await apiRequest(
+                    "/api/machines"
+                );
+
+
+            const technicians =
+                await apiRequest(
+                    "/api/technicians"
+                );
+
+
+            const tasks =
+                await apiRequest(
+                    "/api/maintenance-tasks"
+                );
+
+
+            const overdue =
+                await apiRequest(
+                    "/api/maintenance-tasks/overdue"
+                );
+
+
+            document
+                .getElementById("totalMachines")
+                .textContent =
+                    machines
+                        ? machines.length
+                        : 0;
+
+
+            document
+                .getElementById("totalTechnicians")
+                .textContent =
+                    technicians
+                        ? technicians.length
+                        : 0;
+
+
+            const openCount =
+                tasks
+                    ? tasks.filter(
+                        task =>
+                            task.status === "OPEN"
+                    ).length
+                    : 0;
+
+
+            document
+                .getElementById("openTasks")
+                .textContent =
+                    openCount;
+
+
+            document
+                .getElementById("overdueTasks")
+                .textContent =
+                    overdue
+                        ? overdue.length
+                        : 0;
+
+
+        } catch (error) {
+
+            console.error(
+                "Error loading dashboard:",
+                error
+            );
+        }
+    }
+
+
+    /* =====================================================
+       HELPER FUNCTIONS
+    ===================================================== */
+
+    function formatValue(value) {
+
+        if (
+            value === null ||
+            value === undefined ||
+            value === ""
+        ) {
+
+            return "-";
+        }
+
+        return escapeHtml(
+            String(value)
+        );
+    }
+
+
+    function formatDate(value) {
+
+        if (!value) {
+            return "-";
+        }
+
+
+        try {
+
+            const date =
+                new Date(value);
+
+
+            if (
+                Number.isNaN(
+                    date.getTime()
+                )
+            ) {
+
+                return escapeHtml(
+                    String(value)
+                );
+            }
+
+
+            return date.toLocaleString();
+
+        } catch {
+
+            return escapeHtml(
+                String(value)
+            );
+        }
+    }
+
+
+    function escapeHtml(value) {
+
+        if (value === null || value === undefined) {
+            return "";
+        }
+
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+
+    /* =====================================================
+       INITIAL LOAD
+    ===================================================== */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            loadMachines();
+
+            loadTechnicians();
+
+            loadMaintenanceTasks();
+
+            loadOverdueTasks();
+
+            loadDashboard();
 
         }
     );
 
-
-/* ========================================================= */
-/* LOAD MACHINES */
-/* ========================================================= */
-
-async function loadMachines() {
-
-    try {
-
-        const machines =
-            await api(
-                "/api/machines"
-            );
-
-
-        document
-            .getElementById(
-                "machineCount"
-            )
-            .textContent =
-                machines.length;
-
-
-        const table =
-            document.getElementById(
-                "machineTable"
-            );
-
-
-        table.innerHTML = "";
-
-
-        if (machines.length === 0) {
-
-            table.innerHTML = `
-                <tr>
-                    <td colspan="7" class="empty">
-                        No machines registered yet.
-                    </td>
-                </tr>
-            `;
-
-            return;
-        }
-
-
-        machines.forEach(machine => {
-
-            const row =
-                document.createElement("tr");
-
-
-            row.innerHTML = `
-
-                <td>${machine.id}</td>
-
-                <td>${machine.machineName}</td>
-
-                <td>${machine.machineCode}</td>
-
-                <td>${machine.intervalType}</td>
-
-                <td>${machine.maintenanceInterval}</td>
-
-                <td>${machine.currentUsageHours}</td>
-
-                <td>${formatDate(machine.lastMaintenanceDate)}</td>
-
-            `;
-
-
-            table.appendChild(row);
-
-        });
-
-
-    } catch (error) {
-
-        console.error(
-            "Error loading machines:",
-            error
-        );
-
-    }
-}
-
-
-/* ========================================================= */
-/* LOAD TECHNICIANS */
-/* ========================================================= */
-
-async function loadTechnicians() {
-
-    try {
-
-        const technicians =
-            await api(
-                "/api/technicians"
-            );
-
-
-        document
-            .getElementById(
-                "technicianCount"
-            )
-            .textContent =
-                technicians.length;
-
-
-        const table =
-            document.getElementById(
-                "technicianTable"
-            );
-
-
-        table.innerHTML = "";
-
-
-        if (technicians.length === 0) {
-
-            table.innerHTML = `
-                <tr>
-                    <td colspan="4" class="empty">
-                        No technicians registered yet.
-                    </td>
-                </tr>
-            `;
-
-            return;
-        }
-
-
-        technicians.forEach(technician => {
-
-            const row =
-                document.createElement("tr");
-
-
-            row.innerHTML = `
-
-                <td>${technician.id}</td>
-
-                <td>${technician.name}</td>
-
-                <td>${technician.email}</td>
-
-                <td>${technician.phone || "-"}</td>
-
-            `;
-
-
-            table.appendChild(row);
-
-        });
-
-
-    } catch (error) {
-
-        console.error(
-            "Error loading technicians:",
-            error
-        );
-
-    }
-}
-
-
-/* ========================================================= */
-/* LOAD TASKS */
-/* ========================================================= */
-
-async function loadTasks() {
-
-    try {
-
-        const tasks =
-            await api(
-                "/api/maintenance-tasks"
-            );
-
-
-        const openTasks =
-            tasks.filter(
-                task =>
-                    task.status === "OPEN"
-            );
-
-
-        document
-            .getElementById(
-                "openTaskCount"
-            )
-            .textContent =
-                openTasks.length;
-
-
-        const table =
-            document.getElementById(
-                "taskTable"
-            );
-
-
-        table.innerHTML = "";
-
-
-        if (tasks.length === 0) {
-
-            table.innerHTML = `
-                <tr>
-                    <td colspan="7" class="empty">
-                        No maintenance tasks generated yet.
-                    </td>
-                </tr>
-            `;
-
-            return;
-        }
-
-
-        tasks.forEach(task => {
-
-            const row =
-                document.createElement("tr");
-
-
-            const statusClass =
-                task.status === "OPEN"
-                    ? "status-open"
-                    : "status-completed";
-
-
-            row.innerHTML = `
-
-                <td>${task.id}</td>
-
-                <td>${task.machine.machineName}</td>
-
-                <td>${task.machine.machineCode}</td>
-
-                <td class="${statusClass}">
-                    ${task.status}
-                </td>
-
-                <td>
-                    ${task.dueUsageHours ?? "-"}
-                </td>
-
-                <td>
-                    ${formatDate(task.dueDate)}
-                </td>
-
-                <td>
-                    ${task.triggerReason || "-"}
-                </td>
-
-            `;
-
-
-            table.appendChild(row);
-
-        });
-
-
-    } catch (error) {
-
-        console.error(
-            "Error loading tasks:",
-            error
-        );
-
-    }
-}
-
-
-/* ========================================================= */
-/* LOAD OVERDUE TASKS */
-/* ========================================================= */
-
-async function loadOverdue() {
-
-    try {
-
-        const overdue =
-            await api(
-                "/api/maintenance-tasks/overdue"
-            );
-
-
-        document
-            .getElementById(
-                "overdueCount"
-            )
-            .textContent =
-                overdue.length;
-
-
-        const table =
-            document.getElementById(
-                "overdueTable"
-            );
-
-
-        table.innerHTML = "";
-
-
-        if (overdue.length === 0) {
-
-            table.innerHTML = `
-                <tr>
-                    <td colspan="6" class="empty">
-                        No machines are currently overdue.
-                    </td>
-                </tr>
-            `;
-
-            return;
-        }
-
-
-        overdue.forEach(task => {
-
-            const row =
-                document.createElement("tr");
-
-
-            row.innerHTML = `
-
-                <td>${task.id}</td>
-
-                <td>${task.machine.machineName}</td>
-
-                <td>${task.machine.machineCode}</td>
-
-                <td>${task.machine.currentUsageHours}</td>
-
-                <td>${task.dueUsageHours ?? "-"}</td>
-
-                <td>${formatDate(task.dueDate)}</td>
-
-            `;
-
-
-            table.appendChild(row);
-
-        });
-
-
-    } catch (error) {
-
-        console.error(
-            "Error loading overdue tasks:",
-            error
-        );
-
-    }
-}
-
-
-/* ========================================================= */
-/* FORMAT DATE */
-/* ========================================================= */
-
-function formatDate(value) {
-
-    if (!value) {
-
-        return "-";
-
-    }
-
-    return value
-        .replace("T", " ")
-        .substring(0, 19);
-}
-
-
-/* ========================================================= */
-/* LOAD EVERYTHING */
-/* ========================================================= */
-
-async function loadAll() {
-
-    await loadMachines();
-
-    await loadTechnicians();
-
-    await loadTasks();
-
-    await loadOverdue();
-
-}
-
-
-/* ========================================================= */
-/* INITIAL PAGE LOAD */
-/* ========================================================= */
-
-window.addEventListener(
-    "load",
-    loadAll
-);
-
 </script>
 
 </body>
-
 </html>

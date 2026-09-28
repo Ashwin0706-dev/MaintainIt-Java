@@ -5,47 +5,50 @@ import com.example.MaintainIt.model.Machine;
 import com.example.MaintainIt.service.MachineService;
 
 import jakarta.validation.Valid;
-
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/machines")
+@CrossOrigin
 public class MachineController {
 
     private final MachineService machineService;
 
-    public MachineController(
-            MachineService machineService) {
-
+    public MachineController(MachineService machineService) {
         this.machineService = machineService;
     }
 
-
+    // CREATE MACHINE
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Machine createMachine(
+    public ResponseEntity<Machine> createMachine(
             @Valid @RequestBody MachineRequest request) {
 
-        return machineService.createMachine(
-                request
+        return ResponseEntity.ok(
+                machineService.createMachine(request)
         );
     }
 
-
+    // GET ALL MACHINES
     @GetMapping
-    public List<Machine> getAllMachines() {
+    public ResponseEntity<List<Machine>> getAllMachines() {
 
-        return machineService.getAllMachines();
+        return ResponseEntity.ok(
+                machineService.getAllMachines()
+        );
     }
 
-
-    @GetMapping("/{id}")
-    public Machine getMachine(
+    // DELETE MACHINE
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteMachine(
             @PathVariable Long id) {
 
-        return machineService.getMachine(id);
+        machineService.deleteMachine(id);
+
+        return ResponseEntity.ok(
+                "Machine deleted successfully"
+        );
     }
 }

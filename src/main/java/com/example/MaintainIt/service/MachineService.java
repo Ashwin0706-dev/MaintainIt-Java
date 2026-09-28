@@ -5,6 +5,8 @@ import com.example.MaintainIt.exception.BusinessRuleException;
 import com.example.MaintainIt.exception.ResourceNotFoundException;
 import com.example.MaintainIt.model.Machine;
 import com.example.MaintainIt.repository.MachineRepository;
+import com.example.MaintainIt.repository.MaintenanceTaskRepository;
+import com.example.MaintainIt.repository.UsageLogRepository;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,80 +18,69 @@ import java.util.List;
 public class MachineService {
 
     private final MachineRepository machineRepository;
+    private final UsageLogRepository usageLogRepository;
+    private final MaintenanceTaskRepository maintenanceTaskRepository;
 
-    public MachineService(MachineRepository machineRepository) {
+    public MachineService(
+            MachineRepository machineRepository,
+            UsageLogRepository usageLogRepository,
+            MaintenanceTaskRepository maintenanceTaskRepository) {
+
         this.machineRepository = machineRepository;
+        this.usageLogRepository = usageLogRepository;
+        this.maintenanceTaskRepository = maintenanceTaskRepository;
     }
 
-
-    @Transactional
+    // CREATE MACHINE
     public Machine createMachine(MachineRequest request) {
 
-        String machineCode =
-                request.machineCode().trim();
-
-        if (machineRepository
-                .existsByMachineCodeIgnoreCase(machineCode)) {
-
+        if (machineRepository.existsByMachineCode(request.machineCode())) {
             throw new BusinessRuleException(
-                    "A machine with code '"
-                            + machineCode
-                            + "' already exists."
+                    "Machine code already exists: " + request.machineCode()
             );
         }
 
         Machine machine = new Machine();
 
-        machine.setMachineName(
-                request.machineName().trim()
-        );
-
-        machine.setMachineCode(machineCode);
-
-        machine.setIntervalType(
-                request.intervalType()
-        );
-
-        machine.setMaintenanceInterval(
-                request.maintenanceInterval()
-        );
+        machine.setMachineName(request.machineName().trim());
+        machine.setMachineCode(request.machineCode().trim());
+        machine.setIntervalType(request.intervalType());
+        machine.setMaintenanceInterval(request.maintenanceInterval());
 
         machine.setCurrentUsageHours(0.0);
-
         machine.setUsageAtLastMaintenance(0.0);
-
-        machine.setLastMaintenanceDate(
-                LocalDateTime.now()
-        );
-
+        machine.setLastMaintenanceDate(LocalDateTime.now());
         machine.setActive(true);
 
         return machineRepository.save(machine);
     }
 
-
+    // GET ALL MACHINES
     public List<Machine> getAllMachines() {
-
         return machineRepository.findAll();
     }
 
+    // DELETE MACHINE
+    @Transactional
+    public void deleteMachine(Long id) {
 
-    public Machine getMachine(Long id) {
-
-        return machineRepository
-                .findById(id)
+        Machine machine = machineRepository.findById(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException(
-                                "Machine with ID "
-                                        + id
-                                        + " not found."
+                                "Machine not found with ID: " + id
                         )
                 );
-    }
 
+        /*
+         * Delete records that depend on this machine first.
+         * This prevents foreign-key constraint errors.
+         */
 
-    public List<Machine> getActiveMachines() {
+        usageLogRepository.deleteAllByMachine(machine);
 
-        return machineRepository.findByActiveTrue();
+        maintenanceTaskRepository.deleteAllByMachine(machine);
+
+        // Finally delete the machine
+        machineRepository.delete(machine);
     }
 }
