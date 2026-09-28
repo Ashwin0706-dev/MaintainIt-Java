@@ -1,10 +1,10 @@
-# Step 1: Build the Maven application using the modern Temurin JDK
-FROM maven:3.9.6-eclipse-temurin-17 AS build
+# Step 1: Build the Maven application using Eclipse Temurin JDK 25
+FROM maven:3.9.9-eclipse-temurin-25 AS build
 COPY . .
 RUN mvn clean package -DskipTests
 
-# Step 2: Lightweight runtime environment using Eclipse Temurin 
-FROM eclipse-temurin:17-jre-jammy
+# Step 2: Lightweight runtime environment using Eclipse Temurin JRE 25
+FROM eclipse-temurin:25-jre-jammy
 COPY --from=build /target/MaintainIt-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 
