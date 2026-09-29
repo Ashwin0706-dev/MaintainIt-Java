@@ -1,6 +1,6 @@
 package com.example.MaintainIt.exception;
 
-import tools.jackson.databind.exc.InvalidFormatException;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 import jakarta.validation.ConstraintViolationException;
 
